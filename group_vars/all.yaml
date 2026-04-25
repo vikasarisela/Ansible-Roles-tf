@@ -1,0 +1,9 @@
+MONGODB_HOST: mongodb.cloudskills.fun
+REDIS_HOST: redis.cloudskills.fun
+CATALOGUE_HOST: catalogue.cloudskills.fun
+CART_HOST: cart.cloudskills.fun
+USER_HOST: user.cloudskills.fun
+RABBITMQ_HOST: rabbitmq.cloudskills.fun
+MYSQL_HOST: mysql.cloudskills.fun
+SHIPPING_HOST: shipping.cloudskills.fun
+PAYMENT_HOST: payment.cloudskills.fun
