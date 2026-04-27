@@ -1,9 +1,9 @@
-MONGODB_HOST: mongodb.cloudskills.fun
-REDIS_HOST: redis.cloudskills.fun
-CATALOGUE_HOST: catalogue.cloudskills.fun
-CART_HOST: cart.cloudskills.fun
-USER_HOST: user.cloudskills.fun
-RABBITMQ_HOST: rabbitmq.cloudskills.fun
-MYSQL_HOST: mysql.cloudskills.fun
-SHIPPING_HOST: shipping.cloudskills.fun
-PAYMENT_HOST: payment.cloudskills.fun
+MONGODB_HOST: mongodb-{{ env }}.cloudskills.fun
+REDIS_HOST: redis-{{ env }}.cloudskills.fun
+CATALOGUE_HOST: catalogue-{{ env }}.cloudskills.fun
+CART_HOST: cart-{{ env }}.cloudskills.fun
+USER_HOST: user-{{ env }}.cloudskills.fun
+RABBITMQ_HOST: rabbitmq-{{ env }}.cloudskills.fun
+MYSQL_HOST: mysql-{{ env }}.cloudskills.fun
+SHIPPING_HOST: shipping-{{ env }}.cloudskills.fun
+PAYMENT_HOST: payment-{{ env }}.cloudskills.fun

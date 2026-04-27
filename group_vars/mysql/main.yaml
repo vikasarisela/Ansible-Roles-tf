@@ -1,0 +1,25 @@
+MYSQL_ROOT_PASSWORD: "{{ lookup('amazon.aws.aws_ssm', '/roboshop/{{ env }}/mysql/mysql_root_password', region='us-east-1', decrypt=True ) }}"
+
+# This line is from Ansible, and it’s fetching a password from AWS SSM Parameter Store dynamically.
+#MYSQL_ROOT_PASSWORD
+# → Variable in Ansible (used later in playbook)
+# lookup(...)
+# → Ansible function to fetch data from external sources
+# lookup('amazon.aws.aws_ssm',) is an Ansible lookup plugin. 
+#“Go to AWS SSM Parameter Store and fetch a value.”
+
+# policy created and attached to ec2 mysql server 
+# {
+#   "Version": "2012-10-17",
+#   "Statement": [
+#     {
+#       "Effect": "Allow",
+#       "Action": [
+#         "ssm:GetParameter",
+#         "ssm:GetParameters",
+#         "ssm:GetParametersByPath"
+#       ],
+#       "Resource": "*"
+#     }
+#   ]
+# }
