@@ -1,1 +1,1 @@
-MONGODB_HOST: mongodb.cloudskills.fun
+MONGODB_HOST: mongodb-{{ env }}.cloudskills.fun
