@@ -1,9 +1,4 @@
 - name: daemon reload
-# systemctl daemon reload
-#when there is change in something notifiy others to reload.these are called notifiers or handlers
-#ansible will detect automatially if yellow means changed , green means no change
-#handlers are like notifier when there is change in particular task it can notifiy other tasks. if there is
-#no change no need to run
-- name: daemon reload enable and start
+  # systemctl daemon-reload
   ansible.builtin.systemd_service:
     daemon_reload: true

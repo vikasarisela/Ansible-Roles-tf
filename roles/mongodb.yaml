@@ -1,8 +1,0 @@
-- name: setup mongodb server
-  hosts: mongodb
-  become: yes
-  roles:
-  - mongodb
-
-  #execution process first comes to roles and check then go to roles folder --> loads mongodb
-  # by default runs main.yaml

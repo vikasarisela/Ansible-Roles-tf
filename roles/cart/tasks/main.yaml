@@ -1,32 +1,14 @@
-- name: app setup 
+- name: app setup
   ansible.builtin.import_role:
-     name: common
-     tasks_from: app-setup.yaml
+    name: common
+    tasks_from: app-setup.yaml
 
-- name: app setup 
+- name: app setup
   ansible.builtin.import_role:
-     name: common
-     tasks_from: nodejs.yaml
+    name: common
+    tasks_from: nodejs.yaml
 
-
-# - name: evaluate cataalogue database
-#   community.mongodb.mongodb_shell:
-#     login_host: {{ MONGODB_HOST }}
-#     eval: db.getMongo().getDBNames().indexOf('catalogue')
-#   register: catalogue_output
-
-# - name: print catalogue output
-#   ansible.builtin.debug:
-#     msg: "{{ catalogue_output }}"
-
-- name: system setup 
+- name: system setup
   ansible.builtin.import_role:
-     name: common
-     tasks_from: system-setup.yaml
-
-# refer 37.10 for exectuion process of catalogue -session 27
-# to check health  - curl http://catalogue.cloudskills.fun:8080/health
-
-#ansible-playbook -i inventory.ini main.yaml -e "component=catalogue"
-#execution process first comes to roles and check then go to roles folder --> loads mongodb
-# by default runs main.yaml
+    name: common
+    tasks_from: system-setup.yaml

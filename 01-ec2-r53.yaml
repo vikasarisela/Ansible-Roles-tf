@@ -1,31 +1,30 @@
-- name: Creating Ec2 Instance and Route53
+- name: create ec2 and r53
   hosts: local
   connection: local
   vars:
-    AMI_ID: ami-09c813fb71547fc4f
-    Instnace_ID: i-017c9856718c1df33
-    Security_Group: sg-07e88823124a6dddf
-    Domain_Name: "cloudskills.fun"
-    instances: 
-    # we can pass instance through command line using -e
-    #-e "instances = ['catalogue','user','cart']"
+    ami_id: ami-09c813fb71547fc4f
+    sg_id: sg-07c8acf3fa6b923fa # replace with your SG ID
+    zone_id: "Z0948150OFPSYTNVYZOY" # replace with your ID
+    domain_name: "daws86s.fun"
+    # we can pass instances through command line using -e
+    # instances: 
     # - mongodb
     # - redis
     # - mysql
     # - rabbitmq
-  tasks: 
-  - name: create ec2 Instance
+  tasks:
+  - name: create ec2 instance
     amazon.aws.ec2_instance:
-       name: "{{ item }}"    #mongodb
-       instance_type: t2.micro
-       image_id: "{{ AMI_ID }}"
-       security_group: "{{ Security_Group }}"
-       tags:
-         Name: "{{ item }}"
+      name: "{{ item }}"
+      instance_type: t3.micro
+      security_group: "{{ sg_id }}"
+      image_id: "{{ ami_id }}"
+      tags:
+        Name: "{{ item }}"
     loop: "{{ instances }}"
     register: ec2_output
 
-  - # - name: print the ec2_output
+  # - name: print the ec2_output
   #   ansible.builtin.debug:
   #     msg: "{{ ec2_output }}"
 
@@ -42,8 +41,8 @@
   - name: create route53 record
     amazon.aws.route53:
       state: present
-      zone: "{{ Domain_Name }}"
-      record: "{{ item.item }}.{{ Domain_Name }}" # mongodb.daws86s.fun
+      zone: "{{ domain_name }}"
+      record: "{{ item.item }}.{{ domain_name }}" # mongodb.daws86s.fun
       type: A
       ttl: 1
       value: "{{ item.instances[0].private_ip_address }}"
@@ -54,17 +53,11 @@
   - name: create route53 record for frontend
     amazon.aws.route53:
       state: present
-      zone: "{{  Domain_Name }}"
-      record: "{{ Domain_Name }}" # daws86s.fun
+      zone: "{{ domain_name }}"
+      record: "{{ domain_name }}" # daws86s.fun
       type: A
       ttl: 1
       value: "{{ item.instances[0].public_ip_address }}"
       overwrite: true
     when: item.item == "frontend"
     loop: "{{ ec2_output.results }}"
-
-
-#pip3.9 install botocore boto3
-# ansible wrote in pyhton , if ansible wants to contact aws , aws is expecting python libraries
-
-#ansible-playbook -i inventory.ini ec2-r53.yaml -e "instances=['frontend']"
